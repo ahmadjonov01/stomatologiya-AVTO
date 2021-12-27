@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Sotib olinga Produktlar</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Sotib olinga Produktlar</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"> Sotib olinga Produktlar</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div style="align-items: center">
+                        <div class="modal-body">
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="inputState">Product ID</label>
+                                        <select name="parent_id" id="inputState" class="form-control">
+                                            <option value="">_________</option>
+                                            {% for datum in datasklad %}
+                                                <option value="{{ datum.id }}">{{ datum.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label for="inputState">Ishlab chiqarivchi ID</label>
+                                    <select name="ish_ch_id" id="inputState" class="form-control">
+                                        <option value="">_________</option>
+                                        {% for datum in dataISHCH %}
+                                            <option value="{{ datum.id }}">{{ datum.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputPassword4">Ummumiy narxi</label>
+                                        <input type="number" name="prices" class="form-control" id="inputPassword4"
+                                               placeholder="Ummumiy narxi*">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputPassword4">Maxsulot soni</label>
+                                        <input type="number" name="soni" class="form-control" id="inputPassword4"
+                                               placeholder="Maxsulot soni*">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <div class="form-row">
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table id="example2" class="table table-bordered table-hover">
+
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#exampleModal"
+                                            data-whatever="@getbootstrap">Qo`shish
+                                    </button>
+
+                                    <thead>
+
+                                    <tr>
+                                        <th>№</th>
+                                        <th>Ishlab chiqarivchi ID</th>
+                                        <th>Ammal qillish muddati</th>
+                                        <th>Product ID</th>
+                                        <th>Maxsulot soni</th>
+                                        <th>Ummumiy narxi</th>
+                                        <th>Yaratilgan sana</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    {% for datum in data %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ datum.ish_ch_id }}
+                                            </td>
+                                            <td>{{ datum.parent_id }}</td>
+                                            <td>{{ datum.soni }}</td>
+                                            <td>{{ datum.prices }}</td>
+                                            <td>{{ datum.date }}</td>
+                                            <td>
+                                                <a href="{% url 'deletes' pk=datum.id str='sotibol' %}"
+                                                   class="btn btn-primary btn-flat">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                                <a href="{% url 'dataTablessotiboledit' datum.id %}"
+                                                   class="btn btn-primary btn-flat">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a href="{% url 'protuct41' datum.id %}"
+                                                   class="btn btn-primary btn-flat">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                            </td>
+
+                                        </tr>
+                                    {% endfor %}
+
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+{% endblock %}

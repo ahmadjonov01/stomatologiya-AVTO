@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>DataTables</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">DataTables</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    {% for datum in data %}
+
+
+      <div align="center">
+      <form method="post" class="modal-lg" style="width: 2000px;align-items: center">
+        {% csrf_token %}
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Unique ID</label>
+            <input name="unique_id" type="text" value="{{ datum.unique_id }}" class="form-control" id="inputEmail4"
+                   placeholder="Unique ID">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">Nomi</label>
+            <input type="text" name="name" value="{{ datum.name }}" class="form-control" id="inputPassword4"
+                   placeholder="NOMI">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Kelgan narxi</label>
+            <input name="price1" value="{{ datum.price1 }}" type="number" class="form-control" id="inputEmail4"
+                   placeholder="Kelgan narxi">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">Sotiladigan</label>
+            <input type="number" value="{{ datum.price2 }}" name="price2" class="form-control" id="inputPassword4"
+                   placeholder="Sotiladigan">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputAddress">Ishlab chiqaruvch</label>
+          <input value="{{ datum.manufacturer }}" type="text" name="manufacturer" class="form-control" id="inputAddress"
+                 placeholder="Ishlab chiqaruvchi">
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputState">Katagoriya</label>
+          <select name="category" id="inputState" class="form-control">
+            <option value="{{ datum.category }}">{{ datum.category }}</option>
+            {% for datum in datAC %}
+              <option value="{{ datum.id }}">{{ datum.name }}</option>
+            {% endfor %}
+          </select>
+
+        </div>
+        <div class="form-group">
+          <label for="inputAddress2">Soni(donada)</label>
+          <input type="number" min="0" name="soni" class="form-control" id="inputAddress2" placeholder="Soni"
+                 value="{{ datum.soni }}">
+        </div>
+        <div class="form-group">
+          <label for="inputAddress2">..dan kam qolganda ogohlantirish
+          </label>
+          <input type="text" min="0" name="num" class="form-control" id="inputAddress2" value="{{ datum.num }}"
+                 placeholder="Soni">
+        </div>
+
+{#        <div class="form-row">#}
+{#          <div class="form-group col-md-6">#}
+{#            <label for="inputEmail4" class="d-block">status</label>#}
+{#            <input type="checkbox" value="{{ datum.status }}" data-toggle="switchbutton" name="status" checked#}
+{#                   data-onlabel="Faol"#}
+{#                   data-offlabel="No Faol" data-onstyle="success" data-offstyle="danger" data-size="lg">#}
+{#          </div>#}
+{#        </div>#}
+        <button type="submit" class="btn btn-primary">Save</button>
+      </form>
+    {% endfor %}
+
+    </div>
+  </div>
+
+{% endblock %}

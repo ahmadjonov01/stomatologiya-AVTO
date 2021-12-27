@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Sotilagan Mahsulotlar</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Sotilagan Mahsulotlar</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead>
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <div class="form-row">
+
+                                            <div class="form-row">
+
+                                                <div class="form-group m-2 ">
+                                                    <label for="inputState">Transaction ID</label>
+                                                    <select name="transaction_id" id="inputState" class="form-control">
+                                                        <option value="">_________</option>
+                                                        {% for foo in dataTA %}
+                                                            <option value="{{ foo.id }}">{{ foo.name.name }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                                <div class="form-group m-2 ">
+                                                    <label for="inputState">Product ID</label>
+                                                    <select name="product_id" id="product_id1" class="form-control">
+                                                        <option value="">_________</option>
+                                                        {% for datum in dataAC %}
+                                                            <option value="{{ datum.id }}">{{ datum.name }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group m-2 ">
+                                                    <label for="inputAddress">Soni</label>
+                                                    <input name="soni" type="number" class="form-control"
+                                                           id="inputAddress"
+                                                           placeholder="Soni*">
+                                                </div>
+
+                                                <div class="form-group m-2">
+                                                    <label for="inputAddress">Narxi</label>
+                                                    <input class="form-control" type="number" name="price" value=""
+                                                           step="any" required="" id="id_price">
+                                                </div>
+
+                                                <div class="form-group m-2 ">
+                                                    <label for="inputAddress">Skidka</label>
+                                                    <input class="form-control" name="skidka" value="" maxlength="20000"
+                                                           required
+                                                           id="id_skidka"></div>
+                                            </div>
+                                            <div class="form-group m-2">
+                                                <label for="inputAddress">Skidkali narxi</label>
+
+                                                <input type="number" name="skidkali_narxi" class="form-control"
+                                                       id="id_skidka_narxi"
+                                                       step="any" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-row m-3">
+                                            <button type="submit" class="btn btn-success">SAQLASH</button>
+
+                                        </div>
+                                    </form>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+    <script>
+        let product_id1 = document.querySelector('#product_id1');
+        product_id1.addEventListener('', () => {
+            console.log(product_id1.value);
+        });
+    </script>
+    <script>
+        let price = document.querySelector('#id_price'),
+            skidka = document.querySelector('#id_skidka'),
+            skidkali_narxi = document.querySelector('#id_skidkali_narxi');
+        skidka.addEventListener('keyup', () => {
+            let discount = price.value - (price.value * skidka.value) / 100;
+            console.log(discount);
+            document.querySelector('#id_skidka_narxi').value = discount;
+        });
+    </script>
+{% endblock %}

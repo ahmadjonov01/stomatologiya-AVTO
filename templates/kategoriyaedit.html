@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Kategoriya</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Kategoriya</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        {% for datum in data %}
+
+
+            <div align="center">
+            <form method="post" class="modal-lg" style="width: 2000px;align-items: center">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Kategoriya nomi</label>
+                        <input name="name" type="text" value="{{ datum.name }}" class="form-control"
+                               id="inputEmail4"
+                               placeholder="Unique ID">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Tartib raqami</label>
+                        <input type="text" name="sort" min="0" value="{{ datum.sort }}" class="form-control"
+                               id="inputPassword4"
+                               placeholder="NOMI">
+                    </div>
+                </div>
+                <div class="form-row">
+                    {% if datum.status == True %}
+                        <a href="{% url 'out_of_defult' pk=datum.id str="Category" %}">
+                            <button type="button" class="btn btn-success">Faol</button>
+                        </a>
+                    {% else %}
+                        <a href="{% url 'make_active' pk=datum.id str='Category' %}">
+                            <button type="button" class="btn btn-danger">No Faol</button>
+                        </a>
+                    {% endif %}
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        {% endfor %}
+
+        </div>
+    </div>
+
+{% endblock %}

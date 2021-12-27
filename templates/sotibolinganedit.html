@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Kategoriya</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Kategoriya</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        {% for datum in data %}
+
+
+            <div align="center">
+            <form method="post" class="modal-lg" style="width: 2000px;align-items: center">
+                {% csrf_token %}
+                <div class="form-row">
+
+                    <div class="form-group col-md-4">
+                        <label for="inputState">Product ID</label>
+                        <select name="parent_id" id="inputState" class="form-control">
+                            <option value="{{ datum.id }}">{{ datum.parent_id }}</option>
+                            {% for datum in datasklad %}
+                                <option value="{{ datum.id }}">{{ datum.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="inputState">Ishlab chiqarivchi ID</label>
+                        <select name="ish_ch_id" id="inputState" class="form-control">
+                            <option value="{{ datum.id }}">{{ datum.ish_ch_id }}</option>
+                            {% for datum in dataISHCH %}
+                                <option value="{{ datum.id }}">{{ datum.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                                <label for="inputState">Ummumiy narxi</label>
+                                <input type="number" name="prices" value="{{ datum.prices }}" class="form-control"
+                                       id="inputPassword4"
+                                       placeholder="Ummumiy narxi*">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group col-md-4">
+                        <label for="inputState">Maxsulot soni</label>
+                        <h5>{{ datum.soni }}
+                        </h5>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        {% endfor %}
+
+        </div>
+    </div>
+
+{% endblock %}
+<form method="post">
+    {% csrf_token %}
+
+    <div class="form-group col-md-6">
+        <div class="form-row">
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </div>
+
+</form>

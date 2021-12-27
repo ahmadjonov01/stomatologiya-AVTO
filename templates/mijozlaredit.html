@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Mijozni taxrirlash</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Mijozni taxrirlash</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        {% for datum in data %}
+
+
+            <div align="center">
+            <form method="post" class="modal-lg" style="width: 2000px;align-items: center">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">F.I.O</label>
+                        <input name="name" type="text" value="{{ datum.name }}" class="form-control"
+                               id="inputEmail4"
+                               placeholder="Unique ID">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Telefon nomer</label>
+                        <input type='tel' name="phone" value="{{ datum.phone }}" class="form-control"
+                               id="inputPassword4"
+                               placeholder="Telefon nomer">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Eski qarz</label>
+                        <input name="eskiqarz" value="{{ datum.eskiqarz }}" type="number" class="form-control"
+                               id="inputEmail4"
+                               placeholder="Eski qarz">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Pasport s/r</label>
+                        <input type="text" value="{{ datum.pasport }}" name="pasport" class="form-control"
+                               id="inputPassword4"
+                               placeholder="Pasport s/r">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputAddress">Kim tomonidan berilgan</label>
+                    <input  type="text" name="kimtomon" class="form-control"
+                           id="inputAddress"
+                           placeholder="Kim tomonidan berilgan">
+                </div>
+                <div class="form-group">
+                    <h5>Ammal qilish muddatini tanlashni utman</h5>
+                    <label for="inputAddress">Ammal qillish muddati</label>
+                    <input  required value="{{ datum.date }}" type="date" name="date" class="form-control"
+                           id="inputAddress"
+                           placeholder="Amal qillish muddati">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="inputAddress2">INN</label>
+                    <input type="number" maxlength="9" name="inn" class="form-control" id="inputAddress2"
+                           placeholder="INN"
+                           value="{{ datum.inn }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="inputAddress2">Bank nomi</label>
+                    <input type="text" name="bankname" class="form-control" id="inputAddress2" placeholder="Bank nomi"
+                           value="{{ datum.bankname }}">
+                </div>
+                <div class="form-group">
+                    <label for="inputAddress2">Hisob raqami</label>
+                    <input type="text" name="hisob" class="form-control" id="inputAddress2" placeholder="Hisob raqami"
+                           value="{{ datum.hisob }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="inputAddress2">MFO</label>
+                    <input type="text" name="mfo" class="form-control" id="inputAddress2" placeholder="MFO"
+                           value="{{ datum.mfo }}">
+                </div>
+
+{#                <div class="form-group">#}
+{#                    <label for="inputAddress2">SONI#}
+{#                    </label>#}
+{#                    <input type="number" name="num" class="form-control" id="inputAddress2" value="{{ datum.num }}"#}
+{#                           placeholder="Soni">#}
+{#                </div>#}
+
+                <div class="form-group">
+                    <label for="inputAddress">OKED</label>
+                    <input value="{{ datum.oked }}" type="text" name="oked" class="form-control"
+                           id="inputAddress"
+                           placeholder="OKED">
+                </div>
+                <div class="form-group">
+                    <label for="inputAddress">Manzili</label>
+                    <input value="{{ datum.address }}" type="text" name="address" class="form-control"
+                           id="inputAddress"
+                           placeholder="Manzili">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        {% endfor %}
+
+        </div>
+    </div>
+
+{% endblock %}

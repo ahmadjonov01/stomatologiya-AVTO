@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Tranzaksiya jadvali</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Tranzaksiya jadvali</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Tranzaksiya</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <form method="post">
+                                                {% csrf_token %}
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-4">
+                                                        <label for="inputEmail4">F.I.O</label>
+                                                        <select name="name" id="inputState" class="form-control">
+                                                            <option value="">_________</option>
+
+                                                            {% for foo in dataC %}
+                                                                <option value="{{ foo.id }}">{{ foo.name }}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="form-group col-md-6">
+                                                        <label for="inputPassword4">Summa</label>
+                                                        <input min="0" name="summa" type="number" class="form-control"
+                                                               id="inputPassword4"
+                                                               placeholder="Summa">
+                                                    </div>
+
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Save</button>
+
+                                            </form>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <div>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                data-target="#exampleModal"
+                                                data-whatever="@getbootstrap">Qo`shish
+                                        </button>
+                                    </div>
+                                    <thead>
+
+                                    <tr>
+                                        <th>№</th>
+                                        <th>F.I.O</th>
+                                        <th>Summa</th>
+                                        <th>Yaratilgan sana</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    {% for datum in data %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ datum.name.name }}
+                                            </td>
+                                            <td>{{ datum.summa }}</td>
+                                            <td>{{ datum.date }}</td>
+                                            <td>
+
+
+                                                <a href="{% url 'editform' pk=datum.id %}"
+                                                   class="btn btn-primary btn-flat">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+
+                                                <a href="{% url 'Tranzaksiya' datum.id %}"
+                                                   class="btn btn-primary btn-flat">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+
+                                                <a href="{% url 'export_pdf' pk=datum.id  shaxs='jismoniy sharnoma' %}"
+                                                   class="btn btn-primary btn-flat">
+                                                    <i class="fas fa-paste"></i>
+                                                </a>
+                                                <a href="{% url 'export_pdf' pk=datum.id  shaxs='yuridik shartnoma' %}"
+                                                   class="btn btn-primary btn-flat">
+                                                    <i class="fas fa-file-alt"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+{% endblock %}

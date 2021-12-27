@@ -1,0 +1,205 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>KASSA</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">KASSA</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                {#                                <table id="example2" class="table table-bordered table-hover">#}
+
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <div class="form-row">
+
+                                        <div class="form-row">
+                                            <div class="form-group m-2 ">
+                                                <label for="inputState">Mijoz ID</label>
+                                                <select name="kilent_id" id="inputState" class="form-control">
+                                                    <option value="">_________</option>
+                                                    {% for foo in dataTA %}
+                                                        <option value="{{ foo.id }}">{{ foo.name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group m-2 ">
+                                                <label for="inputAddress">
+                                                    SO`M(UZS-so`m)</label>
+                                                <input name="sum" type="number" class="form-control"
+                                                       id="inputAddress"
+                                                       placeholder="So`m*">
+                                            </div>
+
+                                            <div class="form-group m-2">
+                                                <label for="inputAddress">Qog`oz(USD-$)</label>
+                                                <input class="form-control" id="inputAddress" type="number"
+                                                       name="qogpz" value=""
+                                                       step="any" required="" id="id_price" placeholder="Qog`oz">
+                                            </div>
+
+                                            <div class="form-group m-2 ">
+                                                <label for="inputAddress">Bank hisobi</label>
+                                                <input class="form-control" id="inputAddress" name="bankhisob"
+                                                       value="" maxlength="20000"
+                                                       required="" placeholder="Bank hisobi"
+                                                       id="id_skidka"></div>
+                                        </div>
+                                        <div class="form-group m-2 ">
+                                            <label for="inputAddress">
+                                                Perechisleniya</label>
+                                            <input class="form-control" id="inputAddress" name="perechisleniya"
+                                                   value="" maxlength="20000"
+                                                   required=""
+                                                   id="id_skidka" placeholder="perechisleniya"></div>
+                                    </div>
+
+                                    <div class="form-group m-2">
+                                        <label for="inputAddress">Comment</label>
+
+                                        <input type="text" name="comment" class="form-control" id="inputAddress"
+                                               value=""
+                                               step="any" required="">
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-row m-3">
+                                            <a href="{% url 'dataTableskassa' %}">
+                                                <button type="button" class="btn btn-danger">Bekor qilish</button>
+                                            </a>
+                                        </div>
+                                        <div class="form-row m-3">
+                                            <button type="submit" class="btn btn-success">SAQLASH</button>
+                                        </div>
+                                    </div>
+
+                                </form>
+                                <div class="form-row">
+                                    <form method="get">
+                                        {#                                        {{ my_filter }}#}
+
+                                        <div class="form-row">
+                                            <label class="col-3"> Mijozlarni saralash</label>
+
+                                            <div class="col">
+                                                <select class="custom-select" name="kilent_id" id="id_kilent_id">
+                                                    <option value="">---------</option>
+                                                    {% for foo in dataTA %}
+                                                        <option value="{{ foo.id }}">{{ foo.name }}</option>
+
+                                                    {% endfor %}
+
+
+                                                </select>
+                                            </div>
+                                            <div class="btn btn-success col- 0.3">
+                                                <button type="submit" class="btn btn-success">Search</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div>
+                                    <br>
+                                </div>
+                                <a href="{% url 'dataTableskassa' %}">
+                                    <button type="submit" class="btn btn-success">To`liq Ro`yhatni
+                                        ko`rish
+                                        uchun
+                                    </button>
+                                </a>
+                                <div>
+                                    <section class="coent">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="card">
+
+
+                                                        <div class="card-body">
+
+                                                            </form>
+                                                            <table id="example2"
+                                                                   class="table table-bordered table-hover">
+                                                                <thead>
+
+                                                                <tr>
+                                                                    <th>№</th>
+                                                                    <th>Mijoz</th>
+                                                                    <th>SO`M(UZS-so`m)</th>
+                                                                    <th>Qog`oz(USD-$)</th>
+                                                                    <th>Bank hisobi</th>
+                                                                    <th>Perechisleniya</th>
+                                                                    <th>Sanasi</th>
+                                                                    <th>Comment</th>
+                                                                </tr>
+                                                                </thead>
+
+                                                                <tbody>
+                                                                {% for datum in data %}
+                                                                    <tr>
+                                                                        <td>{{ forloop.counter }}</td>
+                                                                        <td>{{ datum.kilent_id.name }}
+                                                                        </td>
+                                                                        <td>{{ datum.sum }}</td>
+                                                                        <td>{{ datum.qogpz }}</td>
+                                                                        <td>{{ datum.bankhisob }}</td>
+                                                                        <td>{{ datum.perechisleniya }}</td>
+                                                                        <td>{{ datum.date }}</td>
+                                                                        <td>{{ datum.comment }}</td>
+                                                                    </tr>
+                                                                {% endfor %}
+                                                            </table>
+                                                        </div>
+                                                        <!-- /.card-body -->
+                                                    </div>
+                                                    <!-- /.card -->
+
+                                                    <!-- /.card -->
+                                                </div>
+                                                <!-- /.col -->
+                                            </div>
+                                            <!-- /.row -->
+                                        </div>
+                                        <!-- /.container-fluid -->
+                                    </section>
+                                </div>
+                                <!-- /.card-body -->
+                                <!-- /.card -->
+
+                                <!-- /.card -->
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+{% endblock %}

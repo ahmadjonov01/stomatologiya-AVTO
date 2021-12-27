@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Mijoz Ko`rinishi</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Mijoz Ko`rinishi</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead>
+                                    {% for datum in data %}
+                                        <label for="inputState">F.I.O</label>
+                                        <br>
+                                        <h6>{{ datum.name }}</h6>
+                                        <hr>
+
+                                        <label for="inputState">Telefon nomer</label>
+                                        <br>
+                                        <h6>{{ datum.phone }}</h6>
+                                        <hr>
+
+                                        <label for="inputState">Eski qarz</label>
+                                        <br>
+                                        <h6>{{ datum.eskiqarz }}</h6>
+                                        <hr>
+
+                                        <label for="inputState">Pasport s/r</label>
+                                        <br>
+                                        <h6>{{ datum.pasport }}</h6>
+                                        <hr>
+
+                                        <label for="inputState">Kim tomonidan berilgan</label>
+                                        <br>
+                                        <h6>{{ datum.kimtomon }}</h6>
+                                        <hr>
+
+                                        <label for="inputState">Amal qillish muddati</label>
+                                        <br>
+                                        <h6>{{ datum.date }}</h6>
+                                        <hr>
+
+                                        <label for="inputState">INN</label>
+                                        <br>
+                                        <h6>{{ datum.inn }}</h6>
+                                        <hr>
+
+                                        <label for="inputState">Bank nomi</label>
+                                        <br>
+                                        <h6>{{ datum.bankname }}</h6>
+                                        <hr>
+
+
+                                        <label for="inputState">Hisob raqami</label>
+                                        <br>
+                                        <h6>{{ datum.hisob }}</h6>
+                                        <hr>
+
+                                        <label for="inputState">MFO</label>
+                                        <br>
+                                        <h6>{{ datum.mfo }}</h6>
+                                        <hr>
+
+                                        <label for="inputState">OKED</label>
+                                        <br>
+                                        <h6>{{ datum.oked }}</h6>
+                                        <hr>
+
+                                        <label for="inputState">Yaratilgan vaqti</label>
+                                        <br>
+                                        <h6>{{ datum.created_at }}</h6>
+                                        <hr>
+
+                                        <label for="inputState">Manzili</label>
+                                        <br>
+                                        <h6>{{ datum.address }}</h6>
+                                        <hr>
+
+                                    {% endfor %}
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+{% endblock %}

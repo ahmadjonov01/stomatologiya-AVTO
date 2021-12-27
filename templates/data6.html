@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Ishlab chiqaruvchi (tovarlar shu odamdan olinadi)</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">DataTables</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Skladga product qo`shish uchun shuni
+                            to`ldiring</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputEmail4">F.I.O (yoki kompaniya nomi )</label>
+                                    <input name="name" type="text" class="form-control" id="inputEmail4"
+                                           placeholder="Nomi">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputPassword4">Yaratilgan</label>
+                                    <input type="date" name="date" class="form-control" id="inputPassword4"
+                                           placeholder="Yaratilgan sana">
+                                </div>
+
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputPassword4">Telefon nomer</label>
+                                <input type="tel" name="phone" class="form-control" id="inputPassword4"
+                                       placeholder="Yaratilgan sana">
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="inputPassword4">Email</label>
+                                <input type="email" name="email" class="form-control" id="inputPassword4"
+                                       placeholder="Email">
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="inputPassword4">Web sayt</label>
+                                <input type="text" name="sahifa" class="form-control" id="inputPassword4"
+                                       placeholder="Web sayt">
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputEmail4" class="d-block">status</label>
+                                    <input type="checkbox" data-toggle="switchbutton" name="status" checked
+                                           data-onlabel="Faol"
+                                           data-offlabel="No Faol" data-onstyle="success" data-offstyle="danger"
+                                           data-size="lg">
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </form>
+
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#exampleModal"
+                                            data-whatever="@getbootstrap">ADD
+                                    </button>
+                                    <thead>
+
+                                    <tr>
+                                        <th>№</th>
+                                        <th>Ishlab chiqaruvchi nomi</th>
+                                        <th>Telefon nomer</th>
+                                        <th>Yaratilgan sana</th>
+                                        <th>Holati</th>
+                                        <th>Harakatlar</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    {% for datum in data %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ datum.name }}
+                                            </td>
+                                            <td>{{ datum.phone }}</td>
+                                            <td>{{ datum.date }}</td>
+                                            <td>{% if datum.status == True %}
+                                                <a href="{% url 'out_of_defult' pk=datum.id str="ishch" %}">
+                                                    <button type="button" class="btn btn-success">Faol</button>
+                                                </a>
+                                            {% else %}
+                                                <a href="{% url 'make_active' pk=datum.id str='ishch' %}">
+                                                    <button type="button" class="btn btn-danger">No Faol</button>
+                                                </a>
+                                            {% endif %}
+                                            </td>
+                                            <td>
+                                                <a href="{% url 'deletes' pk=datum.id str='ishch' %}"
+                                                   class="btn btn-primary btn-flat">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                                <a href="{% url 'ishlabchiqaruvedit' datum.id %}"
+                                                   class="btn btn-primary btn-flat">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a href="{% url 'ishlabchiqaruvchilar' datum.id %}"
+                                                   class="btn btn-primary btn-flat">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+{% endblock %}

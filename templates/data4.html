@@ -1,0 +1,271 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Mijozlar Ro`yhati</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Mijozlar Ro`yhati</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"> Mijozlar Ro`yhatiga Mijoz qo`shishi</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div style="align-items: center">
+                        <div class="modal-body">
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputEmail4">F.I.O (yoki kompaniya nomi )</label>
+                                        <input name="name" type="text" class="form-control" id="inputEmail4"
+                                               placeholder="Nomi*">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputPassword4">Telefon</label>
+                                        <input type="tel" name="phone" class="form-control" id="inputPassword4"
+                                               placeholder="Telefon*">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputPassword4">Eski Qarz</label>
+                                        <input type="number" name="eskiqarz" class="form-control" id="inputPassword4"
+                                               placeholder="Eski Qarz*">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputPassword4">INN</label>
+                                        <input type="number" name="inn" class="form-control" id="inputPassword4"
+                                               placeholder="INN*">
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <div class="btn-group d-flex justify-content-center align-items-center">
+                                        <input type="hidden" id="shaxs_turi" name="shaxs_turi">
+                                        <a href="#" class="btn btn-primary d-block btn-lg yuridik-btn active"
+                                           aria-current="page">Yuridik
+                                            shaxs</a>
+                                        <a href="#" class="btn btn-primary d-block btn-lg jismoniy-btn">Jismoniy
+                                            shaxs</a>
+                                    </div>
+                                </div>
+
+                                <div class="yuridik">
+                                    <h1>Yuridik Shaxs</h1>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="inputEmail4">Manzil</label>
+                                            <input name="address" type="text" class="form-control" id="inputEmail4"
+                                                   placeholder="Manzil*">
+                                        </div>
+
+                                        <div class="form-group col-md-6">
+                                            <label for="inputPassword4">Hisob raqam</label>
+                                            <input type="text" name="hisob" class="form-control" id="inputPassword4"
+                                                   placeholder="Hison raqam*">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="inputPassword4">Bank nomi</label>
+                                            <input type="text" name="bankname" class="form-control" id="inputPassword4"
+                                                   placeholder="Bank nomi*">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="inputPassword4">MFO</label>
+                                            <input type="text" name="mfo" class="form-control" id="inputPassword4"
+                                                   placeholder="MFO*">
+                                        </div>
+
+                                        <div class="form-group col-md-6">
+                                            <label for="inputPassword4">OKED</label>
+                                            <input type="text" name="oked" class="form-control" id="inputPassword4"
+                                                   placeholder="OKED*">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="jismoniy" style="display: none;">
+                                    <h1>Jismoniy Shaxs </h1>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="inputEmail4">Manzil</label>
+                                            <input name="address" type="text" class="form-control" id="inputEmail4"
+                                                   placeholder="Manzil*">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="inputEmail4">Kim tomonidan berilgan</label>
+                                            <input name="kimtomon" type="text" class="form-control" id="inputEmail4"
+                                                   placeholder="Kim tomonidan berilgan*">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="inputEmail4">Pasport s/r</label>
+                                            <input name="pasport" type="text" class="form-control" id="inputEmail4"
+                                                   placeholder="Kim tomonidan berilgan*">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="inputEmail4">Amal qillish muddati</label>
+                                            <input name="date" type="date" class="form-control" id="inputEmail4"
+                                                   placeholder="Amal qillish muddati*">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <div class="form-row">
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title"></h3>
+                            </div>
+                            <div class="card-body">
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#exampleModal"
+                                            data-whatever="@getbootstrap">Qo`shish
+                                    </button>
+                                    <thead>
+
+                                    <tr>
+                                        <th>№</th>
+                                        <th>F.I.O</th>
+                                        <th>Ammal qillish muddati</th>
+                                        <th>Eski Qarz</th>
+                                        <th>Telefon nomer</th>
+                                        <th>Harakatlar</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    {% for datum in data %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ datum.name }}
+                                            </td>
+                                            <td>{{ datum.date }}</td>
+                                            <td>{{ datum.eskiqarz }}</td>
+                                            <td>{{ datum.phone }}</td>
+                                            <td>
+                                                <a href="{% url 'deletes' pk=datum.id str='Mijoz' %}"
+                                                   class="btn btn-primary btn-flat">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                                <a href="{% url 'Mijozedit' datum.id %}"
+                                                   class="btn btn-primary btn-flat">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a href="{% url 'Mijozlar' datum.id %}"
+                                                   class="btn btn-primary btn-flat">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                <a href="{% url 'mijoz_chart' datum.id %}"
+                                                   class="btn btn-primary btn-flat">
+                                                  <i class="fas fa-chart-line"></i>
+                                                </a>
+                                            </td>
+
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+        </section>
+
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $('.yuridik-btn').click(function (e) {
+            e.preventDefault();
+            if ($('.jismoniy-btn').hasClass('active')) {
+                $('.jismoniy-btn').removeClass('active');
+            }
+            if ($('.yuridik-btn').hasClass('active')) {
+                $('#shaxs_turi').val('yuridik');
+            } else {
+                $('.yuridik-btn').addClass('active');
+                $('.jismoniy').fadeOut();
+                setTimeout(() => {
+                    $('.yuridik').fadeIn();
+
+                }, 400);
+                $('#shaxs_turi').val('yuridik');
+            }
+        });
+        $('.jismoniy-btn').click(function (e) {
+            e.preventDefault();
+            if ($('.yuridik-btn').hasClass('active')) {
+                $('.yuridik-btn').removeClass('active');
+            }
+            if ($('.jismoniy-btn').hasClass('active')) {
+                $('#shaxs_turi').val('jismoniy');
+            } else {
+                $('.jismoniy-btn').addClass('active');
+                $('.yuridik').fadeOut();
+                setTimeout(() => {
+                    $('.jismoniy').fadeIn();
+
+                }, 400);
+                $('#shaxs_turi').val('jismoniy');
+            }
+        });
+    </script>
+{% endblock %}
